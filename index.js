@@ -12,3 +12,11 @@ app.listen(PORT, () =>{
     console.log(`Listening on port ${PORT}`)
 })
 
+
+app.get("/items/:id", async (req,res) =>{
+    const {id} = req.params
+    const one_img = await pool.query('SELECT * FROM items WHERE item_id = $1', [id])
+    res.json(one_img.rows[0]);
+})
+
+
