@@ -19,10 +19,12 @@ app.get("/items/:id", async (req,res) =>{
     res.json(one_img.rows[0]);
 })
 
+/*
 app.get("/item/:name", async (req,res) =>{
     const {name} = req.params
     const one_img = await pool.query('SELECT * FROM items WHERE item_name = $1', [name])
     res.json(one_img.rows[0]);
 })
 
+*/
 
