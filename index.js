@@ -1,17 +1,84 @@
 const express = require('express');
 const cors = require('cors');
+const session_express = require('express-session');
+const pgSession = require('connect-pg-simple')(session_express);
+const cookie_parser = require('cookie-parser');
 const pool = require('./connect_data');
-
+const body_parser = require('body-parser');
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+
+const session_store = new pgSession({
+    pool: pool,
+    tableName: 'session',
+})
+
+const one_day = 1000 * 60 * 60 * 24
 
 PORT = process.env.PORT || 5001;
+
 app.listen(PORT, () =>{
     console.log(`Listening on port ${PORT}`)
 })
 
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}))
+
+app.use(express.json());
+app.use(cookie_parser());
+app.use(express.urlencoded({
+    extended: false,
+}))
+app.use(body_parser.urlencoded({
+    extended: true,
+}))
+app.use(body_parser.json());
+
+
+
+
+app.use(session_express({
+    store: session_store,
+    secret: 'sophiesecret',
+    saveUninitialized: false,
+    cookie: {
+        maxAge: one_day,
+        sameSite: 'lax',
+        secure: false,
+    },
+    resave: false,
+})) 
+
+
+app.get('/random', (req,res) =>{
+    res.json('test');
+})
+
+app.post('/cartpost', (req, res) =>{
+    try{
+        const {item} = req.body;
+        console.log(item);
+        req.session.item = item;
+        res.send({message: 'saved'}).status(201);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+})
+
+app.get('/shoppingcart', (req,res) =>{
+    try{
+        console.log(req.session.item);
+        res.send({message: req.session.item});
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+})
 
 app.get("/items/:id", async (req,res) =>{
     const {id} = req.params
@@ -19,12 +86,7 @@ app.get("/items/:id", async (req,res) =>{
     res.json(one_img.rows[0]);
 })
 
-/*
-app.get("/item/:name", async (req,res) =>{
-    const {name} = req.params
-    const one_img = await pool.query('SELECT * FROM items WHERE item_name = $1', [name])
-    res.json(one_img.rows[0]);
-})
 
-*/
+
+
 
