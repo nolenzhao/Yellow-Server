@@ -70,8 +70,7 @@ app.get('/shoppingcart', (req,res) =>{
         if(req.session.items)
         {
             console.log(req.session.items);
-           // res.send({message: req.session.items});
-            res.send('hi')
+            res.send({message: req.session.items});
         }
         else{
             res.send({message: []})
