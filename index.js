@@ -52,15 +52,11 @@ app.use(session_express({
 })) 
 
 
-app.get('/random', (req,res) =>{
-    res.json('test');
-})
-
 app.post('/cartpost', (req, res) =>{
     try{
-        const {item} = req.body;
-        console.log(item);
-        req.session.item = item;
+        const {items} = req.body;
+        console.log(items);
+        req.session.items = items;
         res.send({message: 'saved'}).status(201);
     }
     catch(err)
@@ -71,8 +67,15 @@ app.post('/cartpost', (req, res) =>{
 
 app.get('/shoppingcart', (req,res) =>{
     try{
-        console.log(req.session.item);
-        res.send({message: req.session.item});
+        if(req.session.items)
+        {
+            console.log(req.session.items);
+           // res.send({message: req.session.items});
+            res.send('hi')
+        }
+        else{
+            res.send({message: []})
+        }
     }
     catch(err)
     {
@@ -84,7 +87,7 @@ app.get("/items/:id", async (req,res) =>{
     const {id} = req.params
     const one_img = await pool.query('SELECT * FROM items WHERE item_id = $1', [id])
     res.json(one_img.rows[0]);
-})
+})  
 
 
 
