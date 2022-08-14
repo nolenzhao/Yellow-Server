@@ -56,13 +56,18 @@ app.post('/cartpost', (req, res) =>{
           console.log(items);
           req.session.items = items;
           res.send(req.session.id);
-           console.log('works');
+          console.log('works');
     }
     catch(err)
     {
         console.log(err);
     }
 })
+app.get('/cartpost', (req,res) =>{
+    res.send(req.session.id);
+})
+
+
 app.get('/clearcookie', (req,res) =>{
     try{
         req.session = null;
