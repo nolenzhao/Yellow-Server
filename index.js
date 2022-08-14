@@ -43,7 +43,7 @@ app.use(session_express({
     saveUninitialized: false,
     cookie: {
         maxAge: one_day,
-        sameSite: 'lax',
+        sameSite: 'none',
         secure: false,
     },
     resave: false,
@@ -63,21 +63,7 @@ app.post('/cartpost', (req, res) =>{
         console.log(err);
     }
 })
-app.get('/cartpost', (req,res) =>{
-    res.send(req.session.id);
-})
 
-
-app.get('/clearcookie', (req,res) =>{
-    try{
-        req.session = null;
-        res.send('cookies cleared');
-    }
-    catch(err)
-    {
-        console.log(err);
-    }
-})
 
 app.get('/shoppingcart', (req,res) =>{
     try{ 
@@ -87,8 +73,7 @@ app.get('/shoppingcart', (req,res) =>{
             res.send({message: req.session.items});
         }
         else{
-            res.send('blorp');
-            //res.send({message: []})
+            res.send({message: []})
         }
     }
     catch(err)
