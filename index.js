@@ -52,17 +52,18 @@ app.use(session_express({
 
 app.post('/cartpost', (req, res) =>{
     try{
-        const {items} = req.body;
-        console.log(items);
-        req.session.items = items;
-
-        res.send(req.session.id);
+          const {items} = req.body;
+          console.log(items);
+          req.session.items = items;
+          res.send(req.session.id);
+           console.log('works');
     }
     catch(err)
     {
         console.log(err);
     }
 })
+
 
 app.get('/shoppingcart', (req,res) =>{
  
@@ -73,7 +74,8 @@ app.get('/shoppingcart', (req,res) =>{
             res.send({message: req.session.items});
         }
         else{
-            res.send({message: []})
+            res.send('blorp');
+            //res.send({message: []})
         }
     }
     catch(err)
