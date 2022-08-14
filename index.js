@@ -63,10 +63,18 @@ app.post('/cartpost', (req, res) =>{
         console.log(err);
     }
 })
-
+app.get('/clearcookie', (req,res) =>{
+    try{
+        req.session = null;
+        res.send('cookies cleared');
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+})
 
 app.get('/shoppingcart', (req,res) =>{
- 
     try{ 
         if(req.session.items)
         {
