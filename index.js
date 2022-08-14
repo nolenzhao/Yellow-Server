@@ -67,7 +67,7 @@ app.post('/cartpost', (req, res) =>{
 app.get('/cartpost', (req,res) =>{
     if(req.session.id)
     {
-        res.send('here');
+        res.send(req.session.id);
 
     }
     else{
