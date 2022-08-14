@@ -45,6 +45,7 @@ app.use(session_express({
         maxAge: one_day,
         sameSite: 'none',
         secure: true,
+        path: '/shoppingcart',
         domain: 'https://yellow-website-server.herokuapp.com'
     },
     resave: false,
