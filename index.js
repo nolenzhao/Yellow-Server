@@ -37,8 +37,6 @@ app.use(body_parser.urlencoded({
 app.use(body_parser.json());
 
 
-
-
 app.use(session_express({
     store: session_store,
     secret: 'sophiesecret',
@@ -58,6 +56,7 @@ app.post('/cartpost', (req, res) =>{
         console.log(items);
         req.session.items = items;
         res.send({message: 'saved'}).status(201);
+        res.send(req.session.id);
     }
     catch(err)
     {
@@ -66,7 +65,8 @@ app.post('/cartpost', (req, res) =>{
 })
 
 app.get('/shoppingcart', (req,res) =>{
-    try{
+ 
+    try{ 
         if(req.session.items)
         {
             console.log(req.session.items);
