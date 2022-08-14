@@ -36,6 +36,7 @@ app.use(body_parser.urlencoded({
 }))
 app.use(body_parser.json());
 
+app.set('trust proxy',1)
 
 app.use(session_express({
     store: session_store,
