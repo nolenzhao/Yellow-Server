@@ -44,7 +44,7 @@ app.use(session_express({
     cookie: {
         maxAge: one_day,
         sameSite: 'none',
-        secure: false,
+        secure: true,
     },
     resave: false,
 })) 
@@ -61,6 +61,17 @@ app.post('/cartpost', (req, res) =>{
     catch(err)
     {
         console.log(err);
+    }
+})
+
+app.get('/cartpost', (req,res) =>{
+    if(req.session.id)
+    {
+        res.send('here');
+
+    }
+    else{
+        res.send('none')
     }
 })
 
