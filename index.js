@@ -62,8 +62,15 @@ app.post('/tester', (req, res) =>{
 })
 
 app.get('/nomget', (req,res) =>{
-    console.log(req.session.nom);
-    res.send({message: req.session.nom})
+    if(req.session.nom)
+    {
+        console.log(req.session.nom);
+        res.send({message: req.session.nom})
+    }
+    else{
+        res.send({message: 'noname'})
+    }
+   
 })
 
 app.post('/cartpost', (req, res) =>{
