@@ -68,6 +68,7 @@ app.post('/cartpost', (req, res) =>{
           const {items} = req.body;
           console.log(items);
           req.session.items = items;
+          res.send({message : 'saved'})
     }
     catch(err)
     {
