@@ -18,9 +18,9 @@ const one_day = 1000 * 60 * 60 * 24
 
 PORT = process.env.PORT || 5001;
 
-app.listen(PORT, () =>{
-    console.log(`Listening on port ${PORT}`)
-})
+
+app.set("trust proxy", 1);
+
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -52,7 +52,7 @@ app.use(session_express({
    
 })) 
 
-app.set("trust proxy", 1);
+
 
 app.post('/testing', (req, res) =>{
     try{
@@ -104,5 +104,8 @@ app.get("/items/:id", async (req,res) =>{
 
 
 
+app.listen(PORT, () =>{
+    console.log(`Listening on port ${PORT}`)
+})
 
 
