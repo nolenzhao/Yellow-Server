@@ -55,17 +55,15 @@ app.get('/random', (req,res) =>{
     res.send('rand')
 })
 
+app.post('/tester', (req, res) =>{
+    const {nom} = req.body;
+    req.session.nom = nom;
+    res.send({message: 'saved'})
+})
 
-app.post('/testing', (req, res) =>{
-    try{
-        const {tester} = req.body;
-        console.log(tester);
-        res.send({message: 'saved'})
-    }
-    catch(err)
-    {
-        console.log(err);
-    }
+app.get('/nomget', (req,res) =>{
+    console.log(req.session.nom);
+    res.send(req.session.nom)
 })
 
 app.post('/cartpost', (req, res) =>{
