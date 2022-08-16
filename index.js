@@ -57,7 +57,6 @@ app.post('/cartpost', (req, res) =>{
           const {items} = req.body;
           console.log(items);
           req.session.items = items;
-
     }
     catch(err)
     {
