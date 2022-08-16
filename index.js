@@ -71,7 +71,7 @@ app.post('/cartpost', (req, res) =>{
           const {items} = req.body;
           console.log(items);
           req.session.items = items;
-          res.send({message : 'saved'})
+          res.send({message : 'saved'}).status(201);
     }
     catch(err)
     {
@@ -87,7 +87,7 @@ app.get('/shoppingcart', (req,res) =>{
             res.send({message: req.session.items});
         }
         else{
-            res.send({message: []})
+            //res.send({message: []})
         }
     }
     catch(err)
