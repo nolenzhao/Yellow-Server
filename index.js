@@ -51,6 +51,16 @@ app.use(session_express({
    
 })) 
 
+app.post('/testing', (req, res) =>{
+    try{
+        const {tester} = req.body;
+        console.log(tester);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+})
 
 app.post('/cartpost', (req, res) =>{
     try{
@@ -63,6 +73,7 @@ app.post('/cartpost', (req, res) =>{
         console.log(err);
     }
 })
+
 
 
 app.get('/shoppingcart', (req,res) =>{
