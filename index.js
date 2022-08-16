@@ -89,7 +89,7 @@ app.get('/shoppingcart', (req,res) =>{
             res.send({message: req.session.items});
         }
         else{
-            //res.send({message: []})
+            res.send({message: []})
         }
     }
     catch(err)
