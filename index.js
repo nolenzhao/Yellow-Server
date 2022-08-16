@@ -42,14 +42,13 @@ app.use(session_express({
     store: session_store,
     secret: 'sophiesecret',
     saveUninitialized: false,
+    resave: false,
     cookie: {
         maxAge: one_day,
-        sameSite: 'none',
-        secure: true,
-        path: '/shoppingcart',
-        domain: 'https://yellow-website-server.herokuapp.com'
+        sameSite: 'lax',
+        secure: false,
     },
-    resave: false,
+   
 })) 
 
 
@@ -58,23 +57,11 @@ app.post('/cartpost', (req, res) =>{
           const {items} = req.body;
           console.log(items);
           req.session.items = items;
-          res.send(req.session.id);
-          console.log('works');
+
     }
     catch(err)
     {
         console.log(err);
-    }
-})
-
-app.get('/cartpost', (req,res) =>{
-    if(req.session.id)
-    {
-        res.send(req.session.id);
-
-    }
-    else{
-        res.send('none')
     }
 })
 
