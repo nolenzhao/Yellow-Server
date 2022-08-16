@@ -51,7 +51,9 @@ app.use(session_express({
     },
    
 })) 
-
+app.get('/random', (req,res) =>{
+    res.send('rand')
+})
 
 
 app.post('/testing', (req, res) =>{
