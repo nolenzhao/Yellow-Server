@@ -63,7 +63,7 @@ app.post('/tester', (req, res) =>{
 
 app.get('/nomget', (req,res) =>{
     console.log(req.session.nom);
-    res.send(req.session.nom)
+    res.send({message: req.session.nom})
 })
 
 app.post('/cartpost', (req, res) =>{
