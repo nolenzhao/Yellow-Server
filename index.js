@@ -55,6 +55,7 @@ app.post('/testing', (req, res) =>{
     try{
         const {tester} = req.body;
         console.log(tester);
+        res.send({message: 'saved'})
     }
     catch(err)
     {
