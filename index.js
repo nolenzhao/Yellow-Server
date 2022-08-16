@@ -8,6 +8,7 @@ const body_parser = require('body-parser');
 const app = express();
 
 
+
 const session_store = new pgSession({
     pool: pool,
     tableName: 'session',
@@ -51,6 +52,8 @@ app.use(session_express({
    
 })) 
 
+app.set("trust proxy", 1);
+
 app.post('/testing', (req, res) =>{
     try{
         const {tester} = req.body;
@@ -75,8 +78,6 @@ app.post('/cartpost', (req, res) =>{
         console.log(err);
     }
 })
-
-
 
 app.get('/shoppingcart', (req,res) =>{
     try{ 
