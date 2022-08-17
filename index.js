@@ -46,8 +46,8 @@ app.use(session_express({
     resave: false,
     cookie: {
         maxAge: one_day,
-        sameSite: 'lax',
-        secure: false,
+        sameSite: 'none',
+        secure: true,
     },
    
 })) 
@@ -58,6 +58,7 @@ app.get('/random', (req,res) =>{
 app.post('/tester', (req, res) =>{
     const {nom} = req.body;
     req.session.nom = nom;
+    console.log(nom);
     res.send({message: 'saved'})
 })
 
