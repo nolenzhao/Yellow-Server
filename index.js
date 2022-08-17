@@ -19,7 +19,7 @@ const one_day = 1000 * 60 * 60 * 24
 PORT = process.env.PORT || 5001;
 
 
-app.set("trust proxy", 1);
+//app.set("trust proxy", 1);
 
 
 app.use(cors({
@@ -37,7 +37,6 @@ app.use(body_parser.urlencoded({
 }))
 app.use(body_parser.json());
 
-app.set('trust proxy',1)
 
 app.use(session_express({
     store: session_store,
