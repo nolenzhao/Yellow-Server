@@ -50,9 +50,7 @@ app.use(session_express({
     },
    
 })) 
-app.get('/random', (req,res) =>{
-    res.send('rand')
-})
+
 
 app.post('/tester', (req, res) =>{
     const {nom} = req.body;
@@ -61,17 +59,6 @@ app.post('/tester', (req, res) =>{
     res.send({message: 'saved'})
 })
 
-app.get('/nomget', (req,res) =>{
-    if(req.session.nom)
-    {
-        console.log(req.session.nom);
-        res.send({message: req.session.nom})
-    }
-    else{
-        res.send({message: 'noname'})
-    }
-   
-})
 
 app.post('/cartpost', (req, res) =>{
     try{
